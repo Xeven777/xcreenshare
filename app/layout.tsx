@@ -3,6 +3,8 @@ import { Mona_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
+import { ThemedToaster, ThemeProvider } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/ThemeToggle";
 
 const mona = Mona_Sans({ subsets: ["latin"] });
 
@@ -25,8 +27,11 @@ export default function RootLayout({
           "min-h-screen bg-gradient-to-b from-background to-muted p-8"
         )}
       >
-        {children}
-        <Toaster richColors position="top-center" />
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          {children}
+          <ModeToggle />
+          <ThemedToaster />
+        </ThemeProvider>
       </body>
     </html>
   );

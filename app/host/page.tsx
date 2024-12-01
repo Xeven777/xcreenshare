@@ -139,7 +139,7 @@ export default function HostPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-center gap-4">
-            <code className="flex-1 p-3 bg-gray-100 dark:bg-gray-800 rounded-lg text-lg font-mono">
+            <code className="flex-1 p-3 bg-accent rounded-lg text-lg font-mono">
               {roomId || "Generating room code..."}
             </code>
             <Button
@@ -152,10 +152,12 @@ export default function HostPage() {
             </Button>
           </div>
 
-          <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
             <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-gray-500" />
-              <span className="text-sm text-gray-500">Current Viewers</span>
+              <Users className="h-5 w-5 text-muted-foreground" />
+              <span className="text-sm text-muted-foreground">
+                Current Viewers
+              </span>
             </div>
             <span className="text-lg font-semibold">{viewers}</span>
           </div>
@@ -184,7 +186,7 @@ export default function HostPage() {
       </Button>
       <div
         className={cn(
-          "fixed top-2 right-4 bg-muted shadow p-2 rounded-lg",
+          "fixed top-4 right-4 bg-muted shadow p-2 rounded-lg",
           hideQR && "hidden"
         )}
       >
