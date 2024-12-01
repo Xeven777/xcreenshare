@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Copy,
   Monitor,
+  Share2,
   Users,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -122,7 +123,7 @@ export default function HostPage() {
     <div className="max-w-2xl mx-auto space-y-8">
       <Button asChild variant="outline">
         <Link href={"/"}>
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="size-4" />
           Back to Home
         </Link>
       </Button>
@@ -138,18 +139,42 @@ export default function HostPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="flex items-center gap-4">
-            <code className="flex-1 p-3 bg-accent rounded-lg text-lg font-mono">
+          <div className="flex items-center gap-2">
+            <code className="flex-1 py-2 px-3 bg-accent rounded-lg text-lg font-mono">
               {roomId || "Generating room code..."}
             </code>
             <Button
-              variant="outline"
               size="icon"
-              onClick={copyRoomId}
-              disabled={!roomId}
+              onClick={() => {
+                navigator.clipboard.writeText(roomId);
+                toast.success("Room code copied!");
+              }}
             >
-              <Copy className="h-4 w-4" />
+              <Copy className="size-4" />
             </Button>
+            {navigator.share && (
+              <Button
+                size="icon"
+                onClick={async () => {
+                  const shareUrl = `${window.location.origin}/join?room=${roomId}`;
+                  try {
+                    await navigator.share({
+                      title: "Join my screen sharing session on XcreenShare",
+                      text: "Click to join my screen sharing session",
+                      url: shareUrl,
+                    });
+                  } catch (err) {
+                    // @ts-expect-error
+                    if (err.name !== "AbortError") {
+                      navigator.clipboard.writeText(shareUrl);
+                      toast.success("Link copied to clipboard!");
+                    }
+                  }
+                }}
+              >
+                <Share2 className="size-4" />
+              </Button>
+            )}
           </div>
 
           <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
