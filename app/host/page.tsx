@@ -9,19 +9,32 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import QRCode from "react-qr-code";
-import { ArrowLeft, Copy, Monitor, Users } from "lucide-react";
+import {
+  ArrowLeft,
+  ChevronLeft,
+  ChevronRight,
+  Copy,
+  Monitor,
+  Users,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import Peer from "peerjs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function HostPage() {
   const [roomId, setRoomId] = useState<string>("");
   const [peer, setPeer] = useState<Peer | null>(null);
   const [viewers, setViewers] = useState<number>(0);
+  const [hideQR, setHideQR] = useState(false);
   const [activeStream, setActiveStream] = useState<MediaStream | null>(null);
   const router = useRouter();
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? `https://${process.env.NEXT_PUBLIC_URL}`
+      : "http://localhost:3000";
 
   useEffect(() => {
     try {
@@ -161,13 +174,24 @@ export default function HostPage() {
             )}
           </CardContent>
         </Card>
-        <div className="fixed top-2 right-4 bg-muted shadow p-2 rounded-lg">
+        <Button
+          className="absolute -top-4 right-1 z-30 group"
+          onClick={() => setHideQR(!hideQR)}
+        >
+          <span className="group-hover:block hidden">
+            {hideQR ? "Show" : "Hide"} QR
+          </span>
+          {hideQR ? <ChevronLeft /> : <ChevronRight />}
+        </Button>
+        <div
+          className={cn(
+            "fixed top-2 right-4 bg-muted shadow p-2 rounded-lg",
+            hideQR && "hidden"
+          )}
+        >
           <h2 className="text-center font-semibold mb-2">Scan to Join</h2>
           <Link href={`/join?id=${roomId}`}>
-            <QRCode
-              value={`https://xcreenshare.vercel.app/join?id=${roomId}`}
-              size={256}
-            />
+            <QRCode value={`${baseUrl}/join?id=${roomId}`} size={256} />
           </Link>
         </div>
       </div>

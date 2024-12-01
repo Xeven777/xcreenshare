@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 const mona = Mona_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Screen Share - Share Your Screen Instantly",
+  title: "XcreenShare - Share Your Screen Instantly",
   description:
     "Share your screen instantly with anyone using a simple room code. No downloads or sign-ups required.",
 };
@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={mona.className}>
         {children}
-        <Toaster richColors />
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );
