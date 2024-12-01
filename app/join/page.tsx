@@ -10,11 +10,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Users } from "lucide-react";
+import { ArrowLeft, Loader, Users } from "lucide-react";
 import Link from "next/link";
 import Peer from "peerjs";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 export default function JoinPage() {
   const [roomId, setRoomId] = useState("");
@@ -89,59 +89,63 @@ export default function JoinPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      <Button variant="outline" asChild>
-        <Link href={"/"}>
-          <ArrowLeft className="h-4 w-4" />
-          Back to Home
-        </Link>
-      </Button>
+    <Suspense
+      fallback={<Loader className="animate-spin mt-10 mx-auto" size={36} />}
+    >
+      <div className="max-w-2xl mx-auto space-y-8">
+        <Button variant="outline" asChild>
+          <Link href={"/"}>
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </Link>
+        </Button>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Users className="h-6 w-6" />
-            Join a Room
-          </CardTitle>
-          <CardDescription>
-            Enter the room code to join and view the shared screen
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {!isConnected ? (
-            <div className="space-y-4">
-              <Input
-                placeholder="Enter room code"
-                value={roomId}
-                onChange={(e) => setRoomId(e.target.value)}
-                disabled={isConnecting}
-              />
-              <Button
-                className="w-full"
-                onClick={joinRoom}
-                disabled={isConnecting || !roomId.trim()}
-              >
-                {isConnecting ? "Connecting..." : "Join Room"}
-              </Button>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <div
-                ref={videoContainerRef}
-                className="relative aspect-video bg-muted-foreground rounded-lg overflow-hidden group"
-              >
-                <video
-                  ref={videoRef}
-                  className="w-full h-full object-contain"
-                  autoPlay
-                  playsInline
-                  controls
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="h-6 w-6" />
+              Join a Room
+            </CardTitle>
+            <CardDescription>
+              Enter the room code to join and view the shared screen
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {!isConnected ? (
+              <div className="space-y-4">
+                <Input
+                  placeholder="Enter room code"
+                  value={roomId}
+                  onChange={(e) => setRoomId(e.target.value)}
+                  disabled={isConnecting}
                 />
+                <Button
+                  className="w-full"
+                  onClick={joinRoom}
+                  disabled={isConnecting || !roomId.trim()}
+                >
+                  {isConnecting ? "Connecting..." : "Join Room"}
+                </Button>
               </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+            ) : (
+              <div className="space-y-4">
+                <div
+                  ref={videoContainerRef}
+                  className="relative aspect-video bg-muted-foreground rounded-lg overflow-hidden group"
+                >
+                  <video
+                    ref={videoRef}
+                    className="w-full h-full object-contain"
+                    autoPlay
+                    playsInline
+                    controls
+                  />
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </Suspense>
   );
 }
