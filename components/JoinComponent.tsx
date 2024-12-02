@@ -26,10 +26,10 @@ export default function JoinPage() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (searchParams.get("id")) {
-      setRoomId(searchParams.get("id") || "");
+    if (searchParams.get("room")) {
+      setRoomId(searchParams.get("room") || "");
     }
-  }, [searchParams.get("id")]);
+  }, [searchParams.get("room")]);
 
   const joinRoom = () => {
     if (!roomId.trim()) {
