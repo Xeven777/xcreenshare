@@ -26,7 +26,7 @@ export default function RootLayout({
       <body
         className={cn(
           mona.className,
-          "min-h-screen bg-gradient-to-b from-background to-muted/80 p-8"
+          "min-h-screen bg-gradient-to-b from-background to-muted/80 p-8 py-10"
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark">

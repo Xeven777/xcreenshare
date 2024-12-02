@@ -15,6 +15,7 @@ import Link from "next/link";
 import Peer from "peerjs";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function JoinPage() {
   const [roomId, setRoomId] = useState("");
@@ -89,7 +90,12 @@ export default function JoinPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
+    <div
+      className={cn(
+        "mx-auto space-y-8",
+        isConnected ? "max-w-6xl" : "max-w-2xl"
+      )}
+    >
       <Button variant="outline" asChild>
         <Link href={"/"}>
           <ArrowLeft className="h-4 w-4" />
@@ -128,11 +134,11 @@ export default function JoinPage() {
             <div className="space-y-4">
               <div
                 ref={videoContainerRef}
-                className="relative aspect-video bg-muted-foreground rounded-lg overflow-hidden group"
+                className="relative aspect-video bg-muted-foreground rounded-lg overflow-hidden group "
               >
                 <video
                   ref={videoRef}
-                  className="w-full h-full object-contain"
+                  className="size-full object-contain bg-gradient-to-br from-background to-muted"
                   autoPlay
                   playsInline
                   controls
