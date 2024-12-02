@@ -32,7 +32,10 @@ export default function HostPage() {
   const [hideQR, setHideQR] = useState(false);
   const [activeStream, setActiveStream] = useState<MediaStream | null>(null);
   const router = useRouter();
-
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  console.log({
+    baseUrl,
+  });
   useEffect(() => {
     try {
       const newPeer = new Peer();
@@ -213,10 +216,7 @@ export default function HostPage() {
       >
         <h2 className="text-center font-semibold mb-2">Scan to Join</h2>
 
-        <QRCode
-          value={`${window.location.origin}/join?room=${roomId}`}
-          size={256}
-        />
+        <QRCode value={`${baseUrl}/join?room=${roomId}`} size={256} />
       </div>
     </div>
   );
