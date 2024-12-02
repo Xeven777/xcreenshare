@@ -7,13 +7,15 @@ import { ModeToggle } from "@/components/ThemeToggle";
 
 const mona = Mona_Sans({
   subsets: ["latin"],
+  display: "swap",
   fallback: ["Arial", "system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
   title: "XcreenShare - Share Your Screen Instantly",
+  metadataBase: new URL("https://xcreenshare.vercel.app"),
   description:
-    "Share your screen instantly with anyone using a simple room code. No downloads or sign-ups required.",
+    "Share your screen📽️😇 instantly with anyone using a simple room code. No downloads or sign-ups required.",
 };
 
 export default function RootLayout({

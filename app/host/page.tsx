@@ -33,9 +33,6 @@ export default function HostPage() {
   const [activeStream, setActiveStream] = useState<MediaStream | null>(null);
   const router = useRouter();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  console.log({
-    baseUrl,
-  });
   useEffect(() => {
     try {
       const newPeer = new Peer();

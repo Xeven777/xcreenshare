@@ -31,6 +31,7 @@ export default function HowItWorks() {
           <div className="lg:w-1/2 mb-10 lg:mb-0">
             <Image
               src={desktop}
+              fetchPriority="low"
               alt="How it works illustration"
               placeholder="blur"
               width={600}
