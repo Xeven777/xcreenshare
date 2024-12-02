@@ -32,7 +32,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
           <ModeToggle />
-          <footer>
+          <footer className="w-full max-w-7xl px-4 mx-auto">
             <p className="text-sm text-muted-foreground">
               &copy; 2024 XcreenShare. Made by{" "}
               <a
