@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -12,7 +11,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="py-28 px-2 sm:px-6 lg:px-8 border-l bg-gradient-to-r rounded-2xl">
+    <section className="py-28 px-4 sm:px-6 lg:px-8 border-l bg-gradient-to-r rounded-2xl">
       <div className="container mx-auto flex flex-col items-center justify-center">
         <div className="mb-10 lg:mb-0">
           <h1 className="text-4xl max-w-2xl sm:text-5xl lg:text-6xl font-bold text-transparent mb-4 tracking-tight bg-gradient-to-br from-foreground to-muted-foreground/70 bg-clip-text">

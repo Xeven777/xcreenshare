@@ -9,13 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, Users } from "lucide-react";
 import Link from "next/link";
 import Peer from "peerjs";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 export default function JoinPage() {
   const [roomId, setRoomId] = useState("");
@@ -23,7 +23,6 @@ export default function JoinPage() {
   const [isConnected, setIsConnected] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -34,10 +33,8 @@ export default function JoinPage() {
 
   const joinRoom = () => {
     if (!roomId.trim()) {
-      toast({
-        title: "Room code required",
+      toast.error("Room code required", {
         description: "Please enter a valid room code",
-        variant: "destructive",
       });
       return;
     }
@@ -51,8 +48,7 @@ export default function JoinPage() {
 
       conn.on("open", () => {
         setIsConnected(true);
-        toast({
-          title: "Connected!",
+        toast.success("Connected!", {
           description: "Waiting for host to share their screen...",
         });
       });
@@ -70,21 +66,17 @@ export default function JoinPage() {
       conn.on("close", () => {
         setIsConnecting(false);
         setIsConnected(false);
-        toast({
-          title: "Disconnected",
+        toast.warning("Disconnected", {
           description: "The host has ended the session",
-          variant: "destructive",
         });
       });
     });
 
     peer.on("error", (err) => {
       setIsConnecting(false);
-      toast({
-        title: "Connection failed",
+      toast.error("Connection failed", {
         description:
           "Could not connect to the room. Please check the room code and try again.",
-        variant: "destructive",
       });
     });
   };

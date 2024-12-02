@@ -201,7 +201,7 @@ export default function HostPage() {
         </CardContent>
       </Card>
       <Button
-        className="absolute -top-4 right-1 z-30 group"
+        className="absolute -top-4 right-1 z-30 group hidden sm:flex"
         onClick={() => setHideQR(!hideQR)}
       >
         <span className="group-hover:block hidden">
@@ -211,8 +211,8 @@ export default function HostPage() {
       </Button>
       <div
         className={cn(
-          "fixed top-4 right-4 bg-muted shadow p-2 rounded-lg",
-          hideQR && "hidden"
+          "fixed top-4 right-1 bg-muted shadow p-2 rounded-lg sm:block hidden",
+          hideQR && "sm:hidden"
         )}
       >
         <h2 className="text-center font-semibold mb-2">Scan to Join</h2>
