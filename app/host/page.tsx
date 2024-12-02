@@ -120,7 +120,7 @@ export default function HostPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
+    <div className="max-w-2xl mx-auto space-y-8 flex-1">
       <Button asChild variant="outline">
         <Link href={"/"}>
           <ArrowLeft className="size-4" />

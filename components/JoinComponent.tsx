@@ -92,7 +92,7 @@ export default function JoinPage() {
   return (
     <div
       className={cn(
-        "mx-auto space-y-8",
+        "mx-auto space-y-8 flex-1",
         isConnected ? "max-w-6xl" : "max-w-2xl"
       )}
     >

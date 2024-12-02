@@ -1,30 +1,65 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Monitor, Users } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between">
-        <div className="lg:w-1/2 mb-10 lg:mb-0">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Share Your Screen, Connect in Real-Time
+    <section className="py-28 px-2 sm:px-6 lg:px-8 border-l bg-gradient-to-r rounded-2xl">
+      <div className="container mx-auto flex flex-col items-center justify-center">
+        <div className="mb-10 lg:mb-0">
+          <h1 className="text-4xl max-w-2xl sm:text-5xl lg:text-6xl font-bold text-transparent mb-4 tracking-tight bg-gradient-to-br from-foreground to-muted-foreground/70 bg-clip-text">
+            Share Your Screen, <span className="text-primary">Connect</span> in
+            Real-Time
           </h1>
-          <p className="text-xl text-white mb-8">
+          <p className="md:text-xl mb-8 opacity-80">
             Collaborate seamlessly with our powerful screen sharing and live
             chat platform.
           </p>
-          <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
-            Start Sharing Now
-          </Button>
         </div>
-        <div className="lg:w-1/2">
-          <Image
-            src="/placeholder.svg?height=400&width=600"
-            alt="Screen sharing illustration"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-xl"
-          />
+        <div className="grid md:grid-cols-2 gap-6 mt-12">
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Monitor className="h-6 w-6" />
+                Start Sharing
+              </CardTitle>
+              <CardDescription>
+                Create a room and share your screen with others
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/host">
+                <Button className="w-full">Create Room</Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-6 w-6" />
+                Join a Room
+              </CardTitle>
+              <CardDescription>
+                Enter a room code to view someone's screen
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/join">
+                <Button variant="outline" className="w-full">
+                  Join Room
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

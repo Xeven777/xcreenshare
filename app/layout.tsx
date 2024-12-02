@@ -26,12 +26,26 @@ export default function RootLayout({
       <body
         className={cn(
           mona.className,
-          "min-h-screen bg-gradient-to-b from-background to-muted/80 p-8 py-10"
+          "min-h-screen bg-gradient-to-b from-background to-muted/80 p-8 py-10 flex flex-col justify-between"
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
           <ModeToggle />
+          <footer>
+            <p className="text-sm text-muted-foreground">
+              &copy; 2024 XcreenShare. Made by{" "}
+              <a
+                href="http://anish7.me"
+                target="_blank"
+                className="text-primary"
+                rel="noopener noreferrer"
+              >
+                Anish{" "}
+              </a>
+              ❤️
+            </p>
+          </footer>
           <ThemedToaster />
         </ThemeProvider>
       </body>
