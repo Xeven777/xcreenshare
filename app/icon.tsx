@@ -4,7 +4,7 @@ export const size = {
   width: 32,
   height: 32,
 };
-export const contentType = "image/png";
+export const contentType = "image/svg+xml";
 
 export default function Icon() {
   return new ImageResponse(
@@ -16,16 +16,16 @@ export default function Icon() {
           width: "100%",
           height: "100%",
           display: "flex",
+          borderRadius: "2px",
           alignItems: "center",
           justifyContent: "center",
           color: "white",
         }}
       >
-        X📽️
+        X
       </div>
     ),
     {
-      emoji: "twemoji",
       ...size,
     }
   );
